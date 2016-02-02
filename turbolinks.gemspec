@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.author   = 'David Heinemeier Hansson'
   s.email    = 'david@loudthinking.com'
   s.license  = 'MIT'
-  s.homepage = 'https://github.com/rails/turbolinks-rails'
-  s.summary  = 'Turbolinks makes following links in your web application faster (use with Rails Asset Pipeline)'
+  s.homepage = 'https://github.com/turbolinks/turbolinks-rails'
+  s.summary  = 'Turbolinks makes navigating your web application faster'
   s.files    = Dir["lib/turbolinks.rb", "lib/turbolinks/*.rb", "README.md", "LICENSE"]
 
   s.add_dependency 'turbolinks-source'
