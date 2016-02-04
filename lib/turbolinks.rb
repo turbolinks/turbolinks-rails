@@ -17,6 +17,7 @@ module Turbolinks
     config.assets.paths += [Turbolinks::Source.asset_path]
 
     initializer :turbolinks do |app|
+      next if self != ActionController::Base
       ActiveSupport.on_load(:action_controller) do
         if app.config.turbolinks.auto_include
           include Controller
