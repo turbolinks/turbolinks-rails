@@ -3,7 +3,7 @@ module Turbolinks
     extend ActiveSupport::Concern
 
     included do
-      before_action :set_turbolinks_location_header_from_session
+      before_action :set_turbolinks_location_header_from_session if respond_to?(:before_action)
     end
 
     def redirect_to(url = {}, options = {})
