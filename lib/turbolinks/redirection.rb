@@ -8,10 +8,11 @@ module Turbolinks
 
     def redirect_to(url = {}, options = {})
       turbolinks = options.delete(:turbolinks)
+      notice = options.delete(:notice)
 
       super.tap do
         if turbolinks != false && request.xhr? && !request.get?
-          visit_location_with_turbolinks(location, turbolinks)
+          visit_location_with_turbolinks(location, turbolinks, notice)
         else
           if request.headers["Turbolinks-Referrer"]
             store_turbolinks_location_in_session(location)
@@ -21,13 +22,14 @@ module Turbolinks
     end
 
     private
-      def visit_location_with_turbolinks(location, action)
+      def visit_location_with_turbolinks(location, action, notice)
         visit_options = {
           action: action.to_s == "advance" ? action : "replace"
         }
 
         script = []
         script << "Turbolinks.clearCache()"
+        script << "turbolinksNotice(#{notice.to_json})" if notice.present?
         script << "Turbolinks.visit(#{location.to_json}, #{visit_options.to_json})"
 
         self.status = 200
