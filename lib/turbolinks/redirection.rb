@@ -20,6 +20,26 @@ module Turbolinks
       end
     end
 
+    def render(*args)
+      options = args.extract_options!
+      return super unless options[:turbolinks]
+
+      html = render_to_string args[0]
+      script = <<-SCRIPT
+        (function(){
+          Turbolinks.clearCache();
+          var parser = new DOMParser();
+          var doc = parser.parseFromString("#{ActionController::Base.helpers.j(html)}", "text/html");
+          document.documentElement.replaceChild(doc.body, document.body);
+          Turbolinks.dispatch("turbolinks:load");
+          window.scroll(0, 0);
+        })();
+      SCRIPT
+      self.status = 200
+      self.response_body = script
+      response.content_type = "text/javascript"
+    end
+
     private
       def visit_location_with_turbolinks(location, action)
         visit_options = {
