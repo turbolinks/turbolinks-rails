@@ -10,7 +10,7 @@ module Turbolinks
       turbolinks = options.delete(:turbolinks)
 
       super.tap do
-        if turbolinks != false && request.xhr? && !request.get?
+        if turbolinks || (turbolinks.nil? && request.xhr? && !request.get?)
           visit_location_with_turbolinks(location, turbolinks)
         else
           if request.headers["Turbolinks-Referrer"]
