@@ -1,5 +1,6 @@
 require 'turbolinks/version'
 require 'turbolinks/redirection'
+require 'turbolinks/assertions'
 require 'turbolinks/source'
 
 module Turbolinks
@@ -20,6 +21,8 @@ module Turbolinks
       ActiveSupport.on_load(:action_controller) do
         if app.config.turbolinks.auto_include
           include Controller
+
+          ::ActionDispatch::Assertions.include ::Turbolinks::Assertions
         end
       end
     end
