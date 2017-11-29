@@ -33,6 +33,7 @@ module Turbolinks
         self.status = 200
         self.response_body = script.join("\n")
         response.content_type = "text/javascript"
+        response.headers["X-Xhr-Redirect"] = location
       end
 
       def store_turbolinks_location_in_session(location)
