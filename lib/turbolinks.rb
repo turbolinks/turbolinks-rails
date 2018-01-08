@@ -1,5 +1,6 @@
 require 'turbolinks/version'
 require 'turbolinks/redirection'
+require 'turbolinks/rendering'
 require 'turbolinks/assertions'
 require 'turbolinks/source'
 
