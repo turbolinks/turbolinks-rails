@@ -9,7 +9,6 @@ module Turbolinks
 
     included do
       include Redirection
-      include Rendering
     end
   end
 
