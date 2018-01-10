@@ -1,5 +1,6 @@
 require 'turbolinks/version'
 require 'turbolinks/redirection'
+require 'turbolinks/route_redirection'
 require 'turbolinks/assertions'
 require 'turbolinks/source'
 
@@ -23,6 +24,19 @@ module Turbolinks
           include Controller
 
           ::ActionDispatch::Assertions.include ::Turbolinks::Assertions
+        end
+      end
+
+      ActiveSupport.on_load(:after_initialize) do
+        # is this the right way to make sure the class is loaded before monkey patching it?
+        require 'action_dispatch/routing/redirection'
+
+        module ActionDispatch
+          module Routing
+            class Redirect
+              include RouteRedirection
+            end
+          end
         end
       end
     end
