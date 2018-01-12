@@ -14,7 +14,7 @@ module Turbolinks
       assert_response(:ok, message)
       assert_equal("text/javascript", response.content_type)
 
-      visit_location, visit_action = turbolinks_visit_location_and_action
+      visit_location, _ = turbolinks_visit_location_and_action
 
       redirect_is       = normalize_argument_to_redirection(visit_location)
       redirect_expected = normalize_argument_to_redirection(options)
