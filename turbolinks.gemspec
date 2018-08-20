@@ -11,5 +11,5 @@ Gem::Specification.new do |s|
   s.description = 'Rails engine for Turbolinks 5 support'
   s.files       = Dir["lib/turbolinks.rb", "lib/turbolinks/*.rb", "README.md", "LICENSE"]
 
-  s.add_dependency 'turbolinks-source', '~> 5.1'
+  s.add_dependency 'turbolinks-source', '~> 5.2'
 end
