@@ -12,7 +12,7 @@ module Turbolinks
 
     def assert_turbolinks_visited(options = {}, message = nil)
       assert_response(:ok, message)
-      assert_equal("text/javascript", response.content_type)
+      assert_equal("text/javascript", response.try(:media_type) || response.content_type)
 
       visit_location, _ = turbolinks_visit_location_and_action
 
@@ -34,7 +34,7 @@ module Turbolinks
     # header is cleared after controller action processing to prevent it
     # from leaking into subsequent requests.
     def turbolinks_request?
-      !request.get? && response.content_type == "text/javascript"
+      !request.get? && (response.try(:media_type) || response.content_type) == "text/javascript"
     end
 
     def turbolinks_visit_location_and_action
