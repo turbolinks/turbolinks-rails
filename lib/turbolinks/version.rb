@@ -1,3 +1,3 @@
 module Turbolinks
-  VERSION = '5.0.1'
+  VERSION = '5.2.0'
 end
